@@ -12,9 +12,9 @@ Android共有ブックマークアプリ（Flutter）のMVP要件・設計ドキ
 
 ### 0. 事前準備
 
-- [ ] リポジトリ構成の決定（Flutter / Cloud Run API / Worker を同居させるか分離するか）
+- [x] リポジトリ構成の決定（Flutter / Cloud Run API / Worker を同居させるか分離するか）
 - [ ] GCPプロジェクト準備（Cloud Run / Firestore / Cloud Tasks / サービスアカウント）
-- [ ] 環境変数・シークレット方針の決定（Geminiキー、Firestore接続等）
+- [x] 環境変数・シークレット方針の決定（Geminiキー、Firestore接続等）
 
 ### 1. データモデル設計（Firestore）
 
