@@ -210,7 +210,39 @@ Response（例）:
 
 ## 9. 認証（将来の複数ユーザー対応）
 
-将来的にGoogle認証を導入し、Cloud Run側でトークン検証して uid を確定。MVPでは単一ユーザーでも、データモデルは users/{uid} 前提で作っておくと移行が楽。
+MVPの時点からAPI保護のために認証を導入し、将来の複数ユーザー化にも備える。
+
+### 9.1 方針
+
+- 将来はFirebase Authentication（Google Sign-In）を採用する。
+- クライアント（Flutter）はIDトークンを取得してAPIに送信する。
+- Cloud RunはFirebase Admin SDKでIDトークンを検証し、`uid` を確定する。
+- データモデルは最初から `users/{uid}` 前提で設計する。
+
+### 9.2 トークンの取り扱い
+
+- 送信方法: `Authorization: Bearer <Firebase ID Token>` をAPIに付与する。
+- 失効/更新: Firebase SDKに委ねる（有効期限切れ時は自動更新）。
+- 端末内の保存: Flutterの安全なストレージ（Keychain/Keystore）にアクセストークンではなく、Firebaseのセッション情報を保存する。
+
+### 9.3 Cloud Run側の認証フロー
+
+1. リクエストの`Authorization`ヘッダーからIDトークンを取得。
+2. Firebase Admin SDKで検証し、`uid` と`email`等の基本属性を抽出。
+3. `uid` をFirestoreのパスに使用（`users/{uid}/bookmarks`）。
+4. 認証失敗時は `401 Unauthorized` を返却。
+
+### 9.4 MVP時点の運用
+
+- MVPから認証を必須にしてAPIを保護する（`Authorization` ヘッダー必須）。
+- 運用は単一ユーザーでも、Firebase Authenticationを使って実ユーザーのIDトークンを発行する。
+- 例外としてローカル開発時のみ、開発用の固定UIDを環境変数で注入できるモードを用意する（本番は無効）。
+
+### 9.5 Firestoreセキュリティ（将来）
+
+- 初期はCloud Runのみ書き込み可能な構成（サービスアカウント権限）。
+- 将来的にクライアントから直接読む場合は、Firebase Authの`uid`と`users/{uid}`を一致させるルールで制御。
+  - 例: `allow read, write: if request.auth.uid == uid;`
 
 ## 10. MVPの範囲 / 将来拡張
 
