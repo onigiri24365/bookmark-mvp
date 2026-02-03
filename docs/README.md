@@ -6,3 +6,4 @@
 
 - 要件・設計ドキュメント: [android-share-bookmark-mvp.md](android-share-bookmark-mvp.md)
 - データストア設計: [datastore-design.md](datastore-design.md)
+- アーキテクチャ/運用の決定事項: [architecture-decisions.md](architecture-decisions.md)

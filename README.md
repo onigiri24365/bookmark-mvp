@@ -6,14 +6,15 @@ Android共有ブックマークアプリ（Flutter）のMVP要件・設計ドキ
 
 - 要件・設計ドキュメント: [docs/android-share-bookmark-mvp.md](docs/android-share-bookmark-mvp.md)
 - データストア設計: [docs/datastore-design.md](docs/datastore-design.md)
+- アーキテクチャ/運用の決定事項: [docs/architecture-decisions.md](docs/architecture-decisions.md)
 
 ## MVP実装TODO
 
 ### 0. 事前準備
 
-- [ ] リポジトリ構成の決定（Flutter / Cloud Run API / Worker を同居させるか分離するか）
+- [x] リポジトリ構成の決定（Flutter / Cloud Run API / Worker を同居させるか分離するか）
 - [ ] GCPプロジェクト準備（Cloud Run / Firestore / Cloud Tasks / サービスアカウント）
-- [ ] 環境変数・シークレット方針の決定（Geminiキー、Firestore接続等）
+- [x] 環境変数・シークレット方針の決定（Geminiキー、Firestore接続等）
 
 ### 1. データモデル設計（Firestore）
 
