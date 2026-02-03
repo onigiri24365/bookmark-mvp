@@ -6,6 +6,7 @@ Android共有ブックマークアプリ（Flutter）のMVP要件・設計ドキ
 
 - 要件・設計ドキュメント: [docs/android-share-bookmark-mvp.md](docs/android-share-bookmark-mvp.md)
 - データストア設計: [docs/datastore-design.md](docs/datastore-design.md)
+- アーキテクチャ/運用の決定事項: [docs/architecture-decisions.md](docs/architecture-decisions.md)
 
 ## MVP実装TODO
 
