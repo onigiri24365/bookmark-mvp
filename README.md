@@ -17,11 +17,11 @@ Android共有ブックマークアプリ（Flutter）のMVP要件・設計ドキ
 
 ### 1. データモデル設計（Firestore）
 
-- [ ] URL正規化ルールの仮決定（UTM、末尾スラッシュ、クエリなど）
-- [ ] urlId 生成方法の確定（正規化URLのsha256）
-- [ ] `urls` コレクション設計（タイトル/OGP/要約ステータス）
-- [ ] `users/{uid}/bookmarks` 設計（タイトル上書き、作成・更新日時）
-- [ ] 要約ステータスの enum 整理（queued/running/done/failed/skipped_non_html）
+- [x] URL正規化ルールの仮決定（UTM、末尾スラッシュ、クエリなど）
+- [x] urlId 生成方法の確定（正規化URLのsha256）
+- [x] `urls` コレクション設計（タイトル/OGP/要約ステータス）
+- [x] `users/{uid}/bookmarks` 設計（タイトル上書き、作成・更新日時）
+- [x] 要約ステータスの enum 整理（queued/running/done/failed/skipped_non_html）
 
 ### 2. Cloud Run API（同期処理）
 
