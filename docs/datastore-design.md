@@ -27,13 +27,13 @@
 | `ogpImageUrl` | string | null | 任意 | OGP画像URL |
 | `createdAt` | timestamp | 必須 | 作成日時 |
 | `updatedAt` | timestamp | 必須 | 更新日時 |
-| `summaryStatusJa` | string | 任意 | `queued` / `running` / `done` / `failed` / `skipped_non_html` |
-| `summaryMdJa` | string | null | 任意 | 日本語要約（Markdown） |
-| `summaryErrorJa` | string | null | 任意 | 失敗時エラー |
+| `summaryStatus` | string | 任意 | `queued` / `running` / `done` / `failed` / `skipped_non_html` |
+| `summaryMd` | string | null | 任意 | 要約（Markdown） |
+| `summaryError` | string | null | 任意 | 失敗時エラー |
 | `summaryModel` | string | null | 任意 | 使用モデル名 |
 | `summaryUpdatedAt` | timestamp | null | 任意 | 要約更新日時 |
 
-> `summaryStatusJa` が `queued`/`running` の場合、Workerが処理中であることを示す。
+> `summaryStatus` が `queued`/`running` の場合、Workerが処理中であることを示す。
 
 ### 2.2 users/{uid}/bookmarks（ユーザー固有の保存）
 
@@ -70,17 +70,17 @@
 1. `urls/{urlId}` を取得
 2. なければ新規作成、あれば `updatedAt` 等のみ更新
 3. `users/{uid}/bookmarks/{urlId}` を upsert
-4. HTMLであれば `summaryStatusJa=queued` にしてCloud Tasksへ投入
+4. HTMLであれば `summaryStatus=queued` にしてCloud Tasksへ投入
 
 ### 4.2 要約更新（Worker）
 
-- `summaryStatusJa` を `running` → `done`/`failed` に更新
+- `summaryStatus` を `running` → `done`/`failed` に更新
 - `summaryUpdatedAt` を常に更新
 
 ## 5. インデックス設計（MVP）
 
 - `users/{uid}/bookmarks` の `updatedAt` 降順（一覧表示用：将来）
-- `urls` の `summaryStatusJa` + `updatedAt` 複合（再処理キューの監視用途：将来）
+- `urls` の `summaryStatus` + `updatedAt` 複合（再処理キューの監視用途：将来）
 
 > MVPでは明示的な複合インデックスは最小限にし、必要に応じて追加する。
 
@@ -98,7 +98,7 @@
 
 ```
 /urls
-  where(summaryStatusJa in ["queued", "failed"])
+  where(summaryStatus in ["queued", "failed"])
   orderBy(updatedAt, desc)
 ```
 
