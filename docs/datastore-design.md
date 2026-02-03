@@ -12,6 +12,7 @@
 
 ```
 /urls/{urlId}
+/users/{uid}
 /users/{uid}/bookmarks/{urlId}
 ```
 
@@ -23,6 +24,7 @@
 | フィールド | 型 | 必須 | 説明 |
 | --- | --- | --- | --- |
 | `url` | string | 必須 | 正規化済みURL（canonical） |
+| `urlId` | string | 必須 | URLのハッシュID（ドキュメントIDと同一） |
 | `canonicalTitle` | string | null | 任意 | 自動取得タイトル |
 | `ogpImageUrl` | string | null | 任意 | OGP画像URL |
 | `createdAt` | timestamp | 必須 | 作成日時 |
@@ -35,7 +37,20 @@
 
 > `summaryStatus` が `queued`/`running` の場合、Workerが処理中であることを示す。
 
-### 2.2 users/{uid}/bookmarks（ユーザー固有の保存）
+### 2.2 users（ユーザー情報）
+
+- **コレクション**: `users`
+- **ドキュメントID**: `uid`
+
+| フィールド | 型 | 必須 | 説明 |
+| --- | --- | --- | --- |
+| `uid` | string | 必須 | ユーザーID（ドキュメントIDと同一） |
+| `createdAt` | timestamp | 必須 | ユーザー作成日時 |
+| `updatedAt` | timestamp | 必須 | 更新日時 |
+| `displayName` | string | null | 任意 | 表示名（将来のプロフィール用） |
+| `photoUrl` | string | null | 任意 | 画像URL（将来のプロフィール用） |
+
+### 2.3 users/{uid}/bookmarks（ユーザー固有の保存）
 
 - **コレクション**: `users/{uid}/bookmarks`
 - **ドキュメントID**: `urlId`（`urls` と同一）
