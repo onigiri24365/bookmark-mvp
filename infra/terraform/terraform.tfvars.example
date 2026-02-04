@@ -1,0 +1,20 @@
+# GCP Project 設定
+project_id = "your-project-id"
+region     = "asia-northeast1"
+environment = "dev"
+
+# Cloud Run 設定（イメージがない場合は空文字列で）
+api_image    = ""
+worker_image = ""
+
+# Cloud Run スケーリング設定
+cloud_run_min_instances = 0
+cloud_run_max_instances = 10
+
+# Firestore 設定
+firestore_location = "asia-northeast1"
+
+# Cloud Tasks 設定
+cloud_tasks_queue_name             = "summary-queue"
+cloud_tasks_max_dispatches_per_second = 10
+cloud_tasks_max_concurrent_dispatches = 5
