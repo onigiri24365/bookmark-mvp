@@ -9,11 +9,11 @@ Android共有ブックマークアプリ（Flutter）のMVPを開発するプロ
 ### 技術スタック
 
 - **クライアント**: Flutter（Android）
-- **バックエンド**: Cloud Run（API / Worker）
+- **バックエンド**: TypeScript + Hono（Cloud Run）
 - **データストア**: Firestore
 - **ジョブキュー**: Cloud Tasks
 - **インフラ管理**: Terraform
-- **LLM要約**: LangChain + Gemini
+- **LLM要約**: Gemini
 
 ### ディレクトリ構成（予定）
 
@@ -98,11 +98,13 @@ docs/               # 設計ドキュメント
 - `flutter analyze` でエラー・警告がないこと
 - `flutter test` で全テストが通ること
 
-#### Cloud Run API / Worker
+#### Cloud Run API / Worker（TypeScript + Hono）
 
-- 言語・フレームワークは今後決定（Python + FastAPI を検討中）
+- `npm run lint` / `npm run typecheck` でエラーがないこと
+- `npm test` で全テストが通ること
 - Firestore操作はトランザクションを適切に使用する
 - エラーハンドリングを明確に行う
+- 型安全性を重視し、`any` の使用を避ける
 
 #### Terraform
 
